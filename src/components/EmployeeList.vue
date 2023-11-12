@@ -1,7 +1,14 @@
 <template>
   <div>
-    <h2 class="list-title">Employee List</h2>
-    <button @click="openModal" class="add-button">Add Employee</button>
+    <h2 class="list-title">
+      Employee List
+    </h2>
+    <button
+      @click="openModal"
+      class="add-button"
+    >
+      Add Employee
+    </button>
     <table class="employee-table">
       <thead>
         <tr>
@@ -10,28 +17,62 @@
           <th>Experience</th>
           <th>Age</th>
           <th>Address</th>
-          <th></th>
+          <th>Edit or Delete</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(employee, index) in employees" :key="index">
-          <td>{{ employee.firstName }}</td>
-          <td>{{ employee.lastName }}</td>
-          <td>{{ employee.experience }}</td>
-          <td>{{ employee.age }}</td>
-          <td>{{ employee.address }}</td>
+        <tr
+          v-for="(
+            employee, index
+          ) in employees"
+          :key="index"
+        >
           <td>
-            <button class="edit-button" @click="editEmployee(index)">Edit</button>
-            <button class="delete-button" @click="deleteEmployee(index)">Delete</button>
+            {{ employee.firstName }}
+          </td>
+          <td>
+            {{ employee.lastName }}
+          </td>
+          <td>
+            {{ employee.experience }}
+          </td>
+          <td>{{ employee.age }}</td>
+          <td>
+            {{ employee.address }}
+          </td>
+          <td>
+            <button
+              class="edit-button"
+              @click="
+                editEmployee(index)
+              "
+            >
+              Edit
+            </button>
+            <button
+              class="delete-button"
+              @click="
+                deleteEmployee(index)
+              "
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
 
     <!-- Modal container -->
-    <div v-if="showModal" class="modal-container" @click="closeModal">
+    <div
+      v-if="showModal"
+      class="modal-container"
+      @click="closeModal"
+    >
       <!-- EmployeeForm component -->
-      <div class="modal-content" @click.stop>
+      <div
+        class="modal-content"
+        @click.stop
+      >
         <employee-form
           :employee="selectedEmployee"
           :editingIndex="editingIndex"
@@ -48,20 +89,27 @@ import EmployeeForm from '@/components/EmployeeForm.vue';
 export default {
   name: 'EmployeeList',
   components: {
-    EmployeeForm,
+    EmployeeForm, // Declare that the EmployeeList component may use the EmployeeForm component
   },
   data() {
     return {
-      showModal: false,
-      editingIndex: null,
+      showModal: false, // The modal is not shown by default
+      editingIndex: null, // Keeps track of the index of the employee being edited
     };
   },
   computed: {
     employees() {
-      return this.$store.state.employees;
+      // Get the array of employees from the Vuex store
+      return this.$store.state
+        .employees;
     },
     selectedEmployee() {
-      return this.editingIndex !== null ? this.employees[this.editingIndex] : null;
+      // Compute the currently selected employee based on the editingIndex
+      return this.editingIndex !== null
+        ? this.employees[
+            this.editingIndex
+          ]
+        : null;
     },
   },
   methods: {
@@ -81,15 +129,30 @@ export default {
     },
     deleteEmployee(index) {
       // Delete the employee or send a request to the server
-      this.$store.commit('deleteEmployee', index);
+      this.$store.commit(
+        'deleteEmployee',
+        index
+      );
     },
-    handleSubmit(employee, editingIndex) {
+    handleSubmit(
+      employee,
+      editingIndex
+    ) {
       if (editingIndex === null) {
         // Add a new employee
-        this.$store.commit('addEmployee', employee);
+        this.$store.commit(
+          'addEmployee',
+          employee
+        );
       } else {
         // Update an existing employee
-        this.$store.commit('updateEmployee', { index: editingIndex, employee });
+        this.$store.commit(
+          'updateEmployee',
+          {
+            index: editingIndex,
+            employee,
+          }
+        );
       }
       // Close the modal after form submission
       this.closeModal();
@@ -103,24 +166,25 @@ export default {
 .list-title {
   margin-bottom: 20px;
 }
-
 .employee-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.employee-table th, .employee-table td {
+.employee-table th,
+.employee-table td {
   padding: 10px;
 }
 
 .employee-table th {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
-.edit-button, .delete-button {
-  background-color: #008CBA;
+.edit-button,
+.delete-button {
+  background-color: #008cba;
   color: white;
   padding: 8px;
   border: none;
@@ -154,7 +218,7 @@ export default {
 }
 
 .add-button {
-  background-color: #008CBA;
+  background-color: #008cba;
   color: white;
   padding: 10px;
   margin-bottom: 20px;

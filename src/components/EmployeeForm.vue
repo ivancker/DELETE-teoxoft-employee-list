@@ -1,23 +1,81 @@
 <template>
   <div class="form">
-    <h2 class="form-title">Employee Form</h2>
-    <form @submit.prevent="submitForm" class="form-container">
-      <label class="form-lable" for="firstName">First Name</label>
-      <input type="text" v-model="localEmployee.firstName" required>
+    <h2 class="form-title">
+      Employee Form
+    </h2>
+    <form
+      @submit.prevent="submitForm"
+      class="form-container"
+    >
+      <label
+        class="form-lable"
+        for="firstName"
+        >First Name</label
+      >
+      <input
+        type="text"
+        v-model="
+          localEmployee.firstName
+        "
+        required
+      />
 
-      <label class="form-lable" for="lastName">Last Name</label>
-      <input type="text" v-model="localEmployee.lastName" required>
+      <label
+        class="form-lable"
+        for="lastName"
+        >Last Name</label
+      >
+      <input
+        type="text"
+        v-model="localEmployee.lastName"
+        required
+      />
 
-      <label class="form-lable" for="experience">Experience (years)</label>
-      <input type="number" v-model="localEmployee.experience" required>
+      <label
+        class="form-lable"
+        for="experience"
+        >Experience (years)</label
+      >
+      <input
+        type="number"
+        v-model="
+          localEmployee.experience
+        "
+        required
+      />
 
-      <label class="form-lable" for="age">Age</label>
-      <input type="number" v-model="localEmployee.age" required>
+      <label
+        class="form-lable"
+        for="age"
+        >Age</label
+      >
+      <input
+        type="number"
+        v-model="localEmployee.age"
+        required
+      />
 
-      <label class="form-lable" for="address">Address</label>
-      <input type="text" v-model="localEmployee.address" required>
+      <label
+        class="form-lable"
+        for="address"
+        >Address</label
+      >
+      <input
+        type="text"
+        v-model="localEmployee.address"
+        required
+      />
 
-      <button type="submit" class="submit-button">{{ editingIndex === null ? 'Add' : 'Update' }}</button>
+      <button
+        type="submit"
+        class="submit-button"
+      >
+        {{
+          editingIndex === null
+            ? 'Add'
+            : 'Update'
+        }}
+      </button>
     </form>
   </div>
 </template>
@@ -32,7 +90,9 @@ export default {
   data() {
     return {
       // Create a local copy of the employee prop
-      localEmployee: { ...this.employee },
+      localEmployee: {
+        ...this.employee,
+      },
     };
   },
   watch: {
@@ -40,7 +100,9 @@ export default {
     employee: {
       handler(newEmployee) {
         // Update the local copy when the prop changes
-        this.localEmployee = { ...newEmployee };
+        this.localEmployee = {
+          ...newEmployee,
+        };
       },
       deep: true,
     },
@@ -48,8 +110,11 @@ export default {
   methods: {
     submitForm() {
       // Emit an event to notify the parent component about the form submission
-      this.$emit('submit', this.localEmployee, this.editingIndex);
-
+      this.$emit(
+        'submit',
+        this.localEmployee,
+        this.editingIndex
+      );
       // Clear the form after submitting data
       this.localEmployee = {
         firstName: '',
@@ -67,10 +132,9 @@ export default {
 /* EmployeeForm style */
 .form {
   background-color: rgb(255, 255, 255);
-  padding: 20px;
+  padding: 20px 50px 40px;
   border-radius: 10px;
 }
-
 .form-container {
   display: flex;
   flex-direction: column;
@@ -82,20 +146,21 @@ export default {
   margin: 5px 0;
 }
 
-input{
+input {
   border: none;
-  border-bottom: 1px solid rgb(63, 63, 63);
+  border-bottom: 1px solid
+    rgb(63, 63, 63);
   outline: none;
   font-size: 18px;
   line-height: 1;
   background: transparent;
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 .submit-button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 10px;
   margin-top: 10px;

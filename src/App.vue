@@ -17,4 +17,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+body {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
 </style>

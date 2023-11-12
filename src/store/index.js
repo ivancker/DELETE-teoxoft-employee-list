@@ -9,7 +9,10 @@ export default createStore({
     addEmployee(state, employee) {
       state.employees.push(employee);
     },
-    updateEmployee(state, { index, employee }) {
+    updateEmployee(
+      state,
+      { index, employee }
+    ) {
       state.employees[index] = employee;
       state.editingIndex = null;
     },
@@ -21,7 +24,9 @@ export default createStore({
     },
   },
   getters: {
-    getEmployees: (state) => state.employees,
-    getEditingIndex: (state) => state.editingIndex,
+    getEmployees: (state) =>
+      state.employees,
+    getEditingIndex: (state) =>
+      state.editingIndex,
   },
 });
